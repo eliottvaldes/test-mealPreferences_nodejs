@@ -29,6 +29,13 @@ const ingredientsPrompt = (prompt, ingredients) => {
 
 }
 
+const dinersPrompt = (prompt, diners) => {
+    if (diners === 0) return prompt;
+    const qntDiners = diners === 1 ? 'person' : 'people';
+    prompt += `\n- diners: ${diners} ${qntDiners}`;
+    return prompt;
+}
+
 
 // Function to generate a full prompt that matches the user preferences - Flexible Version
 const createFlexiblePrompt = (prompt, userPreferences) => {
@@ -39,6 +46,7 @@ const createFlexiblePrompt = (prompt, userPreferences) => {
     prompt = numberPromt(prompt, { ...preparationTime });
     prompt = numberPromt(prompt, { ...nutrition });
     prompt = arrayPromt(prompt, { ...kitchenForniture });
+    prompt = dinersPrompt(prompt, userPreferences.diners);
     prompt = ingredientsPrompt(prompt, [...ingredients]);
 
     return prompt;

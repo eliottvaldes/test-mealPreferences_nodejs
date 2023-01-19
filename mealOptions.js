@@ -51,7 +51,8 @@ const mealOptions = {
         ]
 
     },
-    ingredient: []
+    ingredient: [],
+    diners: 1,
 }
 
 

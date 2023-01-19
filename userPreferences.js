@@ -16,6 +16,7 @@ const user1 = {
         kitchenResources: ['oven'],
     },
     ingredients: ['eggs', 'bacon', 'milk', 'cheese'],
+    diners: 2,
 }
 
 const user2 = {
@@ -36,6 +37,7 @@ const user2 = {
         kitchenResources: ['oven', 'microwave', 'blender', 'food processor'],
     },
     ingredients: ['eggs', 'bacon', 'milk', 'cheese'],
+    diners: 1,
 }
 
 
