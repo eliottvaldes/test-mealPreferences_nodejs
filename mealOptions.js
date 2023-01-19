@@ -55,4 +55,4 @@ const mealOptions = {
 }
 
 
-export default mealOptions;
+module.exports = { mealOptions };
