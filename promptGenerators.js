@@ -5,7 +5,7 @@ const arrayPromt = (prompt, preferences) => {
     for (let [key, value] of Object.entries(preferences)) {
         if (value === "no-preference") continue;
         if (Array.isArray(value)) value = value.join(', ');
-        prompt += `${key}: ${value}, `;
+        prompt += `\n- ${key}: ${value}`;
     }
     return prompt;
 }
@@ -15,7 +15,7 @@ const numberPromt = (prompt, preferences) => {
     if (Object.keys(preferences).length === 0) return prompt;
     for (let [key, value] of Object.entries(preferences)) {
         if (value === 0) continue;
-        prompt += `${key}: ${value}, `;
+        prompt += `\n- ${key}: ${value}`;
     }
     return prompt;
 }
@@ -23,8 +23,8 @@ const numberPromt = (prompt, preferences) => {
 // Function to generate prompts for fields that contains ingredients
 const ingredientsPrompt = (prompt, ingredients) => {
     if (ingredients.length === 0) return prompt;
-    prompt += `\nUse strictly some of the following ingredients: `;
-    prompt += `${ingredients.join(', ')}`;
+    prompt += `\nUse only some of the following ingredients: `;
+    prompt += `\n- ${ingredients.join(', ')}`;
     return prompt;
 
 }
@@ -33,11 +33,14 @@ const ingredientsPrompt = (prompt, ingredients) => {
 // Function to generate a full prompt that matches the user preferences - Flexible Version
 const createFlexiblePrompt = (prompt, userPreferences) => {
     if (Object.keys(userPreferences).length === 0) return prompt;
-    prompt = arrayPromt(prompt, { ...userPreferences.preferences });
-    prompt = numberPromt(prompt, { ...userPreferences.preparationTime });
-    prompt = numberPromt(prompt, { ...userPreferences.nutrition });
-    prompt = arrayPromt(prompt, { ...userPreferences.kitchenForniture });
-    prompt = ingredientsPrompt(prompt, [...userPreferences.ingredients]);
+    const { preferences, preparationTime, nutrition, kitchenForniture, ingredients } = userPreferences;
+
+    prompt = arrayPromt(prompt, { ...preferences });
+    prompt = numberPromt(prompt, { ...preparationTime });
+    prompt = numberPromt(prompt, { ...nutrition });
+    prompt = arrayPromt(prompt, { ...kitchenForniture });
+    prompt = ingredientsPrompt(prompt, [...ingredients]);
+
     return prompt;
 }
 
